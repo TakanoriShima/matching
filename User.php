@@ -3,14 +3,14 @@
         // プロパティ
         public $id;
         public $email;
-        public $password;
+        public $password_digest;
         public $created_at;
         public $last_login_at;
     
         // コンストラクタ
-        public function __construct($email="", $password=""){
+        public function __construct($email, $password){
             $this->email = $email;
-            $this->password = $pasword;
+            $this->password_digest = password_hash($password, PASSWORD_DEFAULT);
         }
     
     }
