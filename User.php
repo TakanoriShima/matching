@@ -8,9 +8,9 @@
         public $last_login_at;
     
         // コンストラクタ
-        public function __construct($email, $password){
+        public function __construct($email, $password_digest){
             $this->email = $email;
-            $this->password_digest = password_hash($password, PASSWORD_DEFAULT);
+            $this->password_digest = $password_digest;
         }
     
     }

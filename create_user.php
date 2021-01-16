@@ -12,7 +12,7 @@
     // 入力エラーが無ければ
     if(count($errors) === 0){
         // パスワードの暗号化
-        $password_digest = password_hash($password, PASSWORD_DEFAULT);
+        $password_digest = password_hash($password, PASSWORD_BCRYPT);
         
         // Userインスタンス生成
         $user = new User($email, $password_digest);

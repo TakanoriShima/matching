@@ -14,7 +14,7 @@
             return $pdo;
         }
         
-        // データベースとの切断を行うメソッド
+        // データベースとの切断
         private static function close_connection($pdo, $stmt){
             $pdo = null;
             $stmt = null;
@@ -82,6 +82,24 @@
             
         }
         
+        // ログイン入力チェック
+        public static function check_login_input($email, $password){
+            $errors = array();
+            
+            if($email === ''){
+                $errors[] = 'メールアドレスを入力してください';
+            }else if(!preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/', $email)){
+                $errors[] = 'メールアドレスではありません';
+            }
+            
+            if(strlen($password) < 5){
+                $errors[] = 'パスワードは5文字以上にしてください';
+            }
+            
+            return $errors;
+            
+        }
+        
         // メールアドレス重複チェック
         public static function check_duplicate_email($email){
             try{
@@ -106,6 +124,45 @@
                     return false;
                 }
 
+            }catch(PDOException $e){
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+        }
+        
+        // ログイン処理
+        public static function login($email, $password){
+            
+            try{
+                // データベースに接続
+                $pdo = self::get_connection();
+                
+                // SELECT文実行
+                $stmt = $pdo->prepare('SELECT * FROM users WHERE email=:email');
+                // バインド処理（上のあやふやな部分は実はこれでした）
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", ""));
+                
+                // 会員を取得
+                $user = $stmt->fetch();
+                
+                // 入力されたメールアドレスを持つ会員がいないのならば
+                if(!$user){
+                    return null;
+                }else{ // 入力されたメールアドレスを持つ会員がいるのならば
+                    // 入力されたパスワードとその会員のパスワードが一致するならば
+                    if(password_verify($password, $user->password_digest)){
+                        // 会員情報を返す
+                        return $user;
+                    }else{ // 一致しないのであれば
+                        return null;
+                    }
+                }
+                
             }catch(PDOException $e){
             }finally{
                 // データベース切断
