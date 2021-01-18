@@ -38,11 +38,12 @@
             <?php }else{ ?>
                 <h2 class="offset-sm-3 col-sm-6 text-center">会員はまだいません</h2>
             <?php } ?>
+
+                <div class="row col-sm-12 mt-5">
+                    <a href="signup.php" class="btn btn-primary offset-sm-3 col-sm-2">会員登録</a>
+                    <a href="login.php" class="btn btn-primary offset-sm-2 col-sm-2">ログイン</a>
+                </div> 
             </div>
-            <div class="row mt-5">
-                <a href="signup.php" class="btn btn-primary offset-sm-3 col-sm-2">会員登録</a>
-                <a href="login.php" class="btn btn-primary offset-sm-2 col-sm-2">ログイン</a>
-            </div> 
         </div>
         
         <!-- Optional JavaScript -->

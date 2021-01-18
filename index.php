@@ -6,6 +6,7 @@
     // フラッシュメッセージの取得
     $flash_message = $_SESSION['flash_message'];
     $_SESSION['flash_message'] = null;
+    session_destroy();
 
     // 全会員データ取得
     $users = UserDAO::get_all_users();

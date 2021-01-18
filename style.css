@@ -2,7 +2,7 @@
 
 .container{
     padding: 40px;
-    background-color: #eeeeee;
+    background-color: #fb617c24;
 }
 
 .flash_message{
@@ -23,15 +23,35 @@
 a{
     display: block;
     color: #222222;
-    background-color: #e51e9533;
     text-decoration: none;
     padding: 3px;
 }
 a:hover{
     color: red;
+    border-bottom: solid 2px red;
     text-decoration: none;
+    background-color: #e51e9533;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all  0.3s ease;
+}
+label{
+    font-weight: bold;
+}
+ul{
+    padding-left: 0;
 }
 
+img#preview {
+    padding-top: 40px;
+}
+small{
+    float: right;
+}
+textarea{
+    color: red;
+}
 @media screen and (max-width: 480px) {
 /* 480pxまでの幅の場合に適応される */
     a:nth-child(2){

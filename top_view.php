@@ -26,7 +26,7 @@
                    <a href="" class="text-center">お気に入り</a>
                </div>
                <div class="col-sm-2">
-                   <a href="" class="text-center">設定</a>
+                   <a href="setting.php" class="text-center">設定</a>
                </div>
                <div class="col-sm-2">
                    <a href="logout.php" class="text-center">ログアウト</a>

@@ -3,11 +3,13 @@
     require_once 'UserDAO.php';
     
     // 入力フォームから値を取得
+    $gender = $_POST['gender'];
+    $age = $_POST['age'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     // 入力チェック
-    $errors = UserDAO::check_new_user($email, $password);
+    $errors = UserDAO::check_new_user($age, $email, $password);
     
     // 入力エラーが無ければ
     if(count($errors) === 0){
@@ -15,7 +17,7 @@
         $password_digest = password_hash($password, PASSWORD_BCRYPT);
         
         // Userインスタンス生成
-        $user = new User($email, $password_digest);
+        $user = new User($gender, $age, $email, $password_digest);
         
         // テーブルに新規追加
         UserDAO::sign_up($user);

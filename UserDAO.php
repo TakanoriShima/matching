@@ -28,7 +28,7 @@
                 // SELECT文実行
                 $stmt = $pdo->query('SELECT * FROM users');
                 // フェッチの結果を、Userクラスのインスタンスにマッピングする
-                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", ""));
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", "", "", ""));
                 // 会員一覧を取得
                 $users = $stmt->fetchAll();
 
@@ -42,6 +42,32 @@
             return $users;  
         }
         
+        // 会員番号から会員情報を取得
+        public static function get_user_by_id($id){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM users WHERE id=:id');
+                // バインド処理
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", "", "", ""));
+                // 会員を取得
+                $user = $stmt->fetch();
+
+            }catch(PDOException $e){
+                $users =  null;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            // 会員データを返す
+            return $user;  
+        }
+        
         // usersテーブルに新規にデータを追加
         public static function sign_up($user){
             
@@ -49,8 +75,10 @@
                 // データベースに接続
                 $pdo = self::get_connection();
                 // INSERT文準備
-                $stmt = $pdo->prepare('INSERT INTO users(email, password_digest) VALUES(:email, :password_digest)');
+                $stmt = $pdo->prepare('INSERT INTO users(gender, age, email, password_digest) VALUES(:gender, :age, :email, :password_digest)');
                 // バインド処理（上のあやふやな部分は実はこれでした）
+                $stmt->bindParam(':gender', $user->gender, PDO::PARAM_STR);
+                $stmt->bindParam(':age', $user->age, PDO::PARAM_INT);
                 $stmt->bindParam(':email', $user->email, PDO::PARAM_STR);
                 $stmt->bindParam(':password_digest', $user->password_digest, PDO::PARAM_STR);
                 // INSERT本番実行
@@ -64,9 +92,12 @@
         }
         
         // 会員登録入力チェック
-        public static function check_new_user($email, $password){
+        public static function check_new_user($age, $email, $password){
             $errors = array();
             
+            if($age == 0){
+                $errors[] = '年齢を選択してください';
+            }
             if($email === ''){
                 $errors[] = 'メールアドレスを入力してください';
             }else if(!preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/', $email)){
@@ -145,7 +176,7 @@
                 // SELECT文本番実行
                 $stmt->execute();
                 // フェッチの結果を、Userクラスのインスタンスにマッピングする
-                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", ""));
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User', array("", "", "", ""));
                 
                 // 会員を取得
                 $user = $stmt->fetch();
@@ -156,6 +187,16 @@
                 }else{ // 入力されたメールアドレスを持つ会員がいるのならば
                     // 入力されたパスワードとその会員のパスワードが一致するならば
                     if(password_verify($password, $user->password_digest)){
+                        // 現在時刻の取得
+                        date_default_timezone_set('Asia/Tokyo');
+                        $now = date("Y-m-d H:i:s");
+                        // UPDATE文実行
+                        $stmt = $pdo->prepare('UPDATE users SET last_login_at=:last_login_at WHERE id=:id');
+                        // バインド処理（上のあやふやな部分は実はこれでした）
+                        $stmt->bindValue(':last_login_at', $now, PDO::PARAM_STR);
+                        $stmt->bindParam(':id', $user->id, PDO::PARAM_INT);
+                        // SELECT文本番実行
+                        $stmt->execute();
                         // 会員情報を返す
                         return $user;
                     }else{ // 一致しないのであれば
@@ -169,4 +210,5 @@
                 self::close_connection($pdo, $stmt);
             }
         }
+        
     }

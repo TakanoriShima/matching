@@ -24,14 +24,36 @@
             </ul>
             <?php endif; ?>
             <form action="create_user.php" method="POST" class="mt-5">
-                <!-- 1行 -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">性別</label>
+                    <div class="col-sm-2 pt-2">
+                        <input type="radio" value="男性" name="gender" id="man" checked>
+                        <label for="man" col-form-label>男性</label>
+                    </div>
+                    <div class="col-sm-2 pt-2">
+                        <input type="radio" value="女性" name="gender" id="woman">
+                        <label for="woman" col-form-label>女性</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">年齢</label>
+                    <div class="col-sm-4 pt-2">
+                        <select name="age" class="form-control">
+                            <option value="0">年齢をお選びください</option>
+                        <?php for($i = 16; $i <= 60; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?>歳</option>
+                        <?php endfor;?>
+                        </select>
+                    </div>
+                </div>
+                
+                 <!-- 1行 -->
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">メールアドレス</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="email" placeholder="メールアドレスを入力してください">
                     </div>
                 </div>
-            
                 <!-- 1行 -->
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">パスワード</label>
