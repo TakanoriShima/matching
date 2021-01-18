@@ -11,7 +11,7 @@
         <title>My Page</title>
     </head>
     <body>
-        <div class="container mt-3">
+        <div class="container">
            <header class="row">
                <div class="col-sm-2">
                    <a href="" class="text-center">検索</a>

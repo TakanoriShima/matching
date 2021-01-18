@@ -1,8 +1,12 @@
 @charset "utf-8";
 
+body{
+    height: 100vh;
+}
 .container{
     padding: 40px;
     background-color: #fb617c24;
+    min-height: 100%; 
 }
 
 .flash_message{
