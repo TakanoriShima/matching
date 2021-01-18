@@ -52,6 +52,25 @@ small{
 textarea{
     color: red;
 }
+.my_avatar{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /*height: auto;*/
+    width: 25vw;
+    height: 25vw;
+}
+.my_profile{
+    list-style-type: none;
+    padding-left: 10px;
+}
+.my_profile li {
+    margin-top: 10px;
+    border-bottom: solid 1px #eeeeee;
+    padding: 12px;
+    padding-left: 34px;
+    border-left: solid 5px #999999;
+}
 @media screen and (max-width: 480px) {
 /* 480pxまでの幅の場合に適応される */
     a:nth-child(2){

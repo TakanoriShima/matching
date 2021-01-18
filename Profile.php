@@ -1,4 +1,5 @@
 <?php
+    require_once 'UserDAO.php';
     class Profile{
         // プロパティ
         public $id;
@@ -33,5 +34,11 @@
             $this->my_type = $my_type;
             $this->favorite_type = $favorite_type;
             $this->introduction = $introduction;
+        }
+        
+        // prifileを作成した会員のインスタンスを取得
+        public function get_user(){
+            $user = UserDAO::get_user_by_id($this->id);
+            return $user;
         }
     }

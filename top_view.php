@@ -38,6 +38,37 @@
                     <p class="flash_message col-sm-12 mb-2 text-center"><?= $flash_message ?></p>        
                 </div>
                 <?php endif; ?>
+                <?php if($my_profile !== false): ?>
+                <div class="card mt-5">
+                    <div class="card-header text-center">
+                        <?= $my_profile->nickname ?>さん のマイページ
+                    </div>
+                    <div class="card-body row">
+                        <div class="col-sm-4">
+                            <img src="<?= AVATAR_IMG_DIR . $my_profile->avatar ?>" class="my_avatar">
+                        </div>
+                        <div class="col-sm-2 text-center mt-3">
+                            <?= $my_profile->nickname ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="my_profile">
+                                <li><?= $my_profile->get_user()->age ?>歳</li>
+                                <li><?= $my_profile->prefecture ?></li>
+                                <li><?= $my_profile->height ?>cm</li>
+                                <li><?= $my_profile->weight ?>kg</li>
+                                <li><?= $my_profile->profession ?></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="row mt-5">
+                    <div class="col-sm-12 text-center">
+                        <a href="setting.php">プロフィールが、未設定です</a>
+                    </div>
+                </div>   
+                <?php endif; ?>
            </div>
         </div>
         

@@ -9,5 +9,11 @@
     $flash_message = $_SESSION['flash_message'];
     $_SESSION['flash_message'] = null;
     
+    // 会員番号の取得
+    $user_id = $_SESSION['user_id'];
+    
+    // プロフィール情報の取得
+    $my_profile = ProfileDAO::get_profile_by_id($user_id); 
+    
     // Viewの読み込み
     include_once 'top_view.php';
