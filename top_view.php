@@ -25,9 +25,12 @@
                <div class="col-sm-2">
                    <a href="" class="text-center">お気に入り</a>
                </div>
+               <?php if($my_profile === false): ?>
                <div class="col-sm-2">
                    <a href="setting.php" class="text-center">設定</a>
                </div>
+               <?php endif; ?>
+               
                <div class="col-sm-2">
                    <a href="logout.php" class="text-center">ログアウト</a>
                </div>
