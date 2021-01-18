@@ -8,12 +8,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
-        <title>会員一覧</title>
+        <title>マッチングサイト</title>
     </head>
     <body>
         <div class="container">
-            <div class="row mt-5">
-                <h1 class="col-sm-12 text-center">会員一覧</h1>
+            <div class="row mt-3">
+                <h1 class="col-sm-12 text-center">マッチングサイト</h1>
             </div>
             <?php if($flash_message): ?>
             <div class="row mt-2">
@@ -41,7 +41,7 @@
             </div>
             <div class="row mt-5">
                 <a href="signup.php" class="btn btn-primary offset-sm-3 col-sm-2">会員登録</a>
-                <a href="login.php" class="btn btn-primary offset-sm-2 col-sm-2 mt-2">ログイン</a>
+                <a href="login.php" class="btn btn-primary offset-sm-2 col-sm-2">ログイン</a>
             </div> 
         </div>
         

@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="row mt-5">
+            <div class="row mt-3">
                 <h1 class="col-sm-12 text-center">ログイン</h1>
             </div>
             <?php if(count($errors) !== 0): ?>

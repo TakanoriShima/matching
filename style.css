@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+.container{
+    padding: 40px;
+    background-color: #eeeeee;
+}
+
 .flash_message{
     color: blue;
     background-color: skyblue;
@@ -13,3 +18,35 @@
     padding: 5px;
     list-style-type: none;
 }
+
+
+a{
+    display: block;
+    color: #222222;
+    background-color: #e51e9533;
+    text-decoration: none;
+    padding: 3px;
+}
+a:hover{
+    color: red;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+/* 480pxまでの幅の場合に適応される */
+    a:nth-child(2){
+        margin-top: 20px;
+    }
+    a.btn.btn-primary.offset-sm-3.col-sm-2 {
+        margin: 0 52px;
+    }
+    a.btn.btn-primary.offset-sm-2.col-sm-2 {
+        margin: 20px 52px 0px 52px;
+    }
+}
+
+/* https://www.seojuku.com/blog/responsive-mediaquery.html */
+/*@media screen and (max-width: 1024px) { }*/
+/*@media screen and (max-width: 896px) { }*/
+/*@media screen and (max-width: 480px) { }*/
+
