@@ -8,12 +8,16 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" href="favicon.ico">
         <title>マッチングサイト</title>
     </head>
     <body>
         <div class="container">
-            <div class="row mt-3">
-                <h1 class="col-sm-12 text-center">マッチングサイト</h1>
+            <div class="row mt-3 mb-2">
+                <div class="col-sm-1 mb-2">
+                    <img src="home.png" class="home">
+                </div>
+                <h1 class="col-sm-11 pt-2 text-center">マッチングサイト</h1>
             </div>
             <?php if($flash_message): ?>
             <div class="row mt-2">
@@ -21,17 +25,19 @@
             </div>
             <?php endif; ?>
             <?php if(count($users) !== 0){ ?>
-            <h4><?= count($users) ?>&nbsp;人</h4>
+            <h4>全会員数： <?= count($users) ?>&nbsp;人</h4>
             <div class="row mt-2">
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>会員番号</th>
-                        <th>email</th>
+                        <th>年齢</th>
+                        <th>性別</th>
                     </tr>
                 <?php foreach($users as $user){ ?>
                     <tr>
                         <td><?= $user->id ?></td>
-                        <td><?= $user->email ?></td>
+                        <td><?= $user->age ?>歳</td>
+                        <td><?= $user->gender ?></td>
                     </tr>
                 <?php } ?>
                 </table>

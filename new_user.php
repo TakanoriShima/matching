@@ -10,9 +10,15 @@
 
         <title>会員登録</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" href="favicon.ico">
     </head>
     <body>
         <div class="container">
+            <div class="row">
+                <div class="col-sm-1 mb-2">
+                    <a href="top.php" class="home-link"><img src="home.png" class="home"></a>
+                </div>
+            </div>
             <div class="row mt-3">
                 <h1 class="col-sm-12 text-center">会員登録</h1>
             </div>

@@ -8,10 +8,16 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" href="favicon.ico">
         <title>Setting</title>
     </head>
     <body>
         <div class="container mt-3">
+            <div class="row">
+                <div class="col-sm-1 mb-2">
+                    <a href="top.php" class="home-link"><img src="home.png" class="home"></a>
+                </div>
+            </div>
            <header class="row">
                <div class="col-sm-2">
                    <a href="" class="text-center">検索</a>

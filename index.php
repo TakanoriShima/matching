@@ -2,7 +2,7 @@
     session_start();
     // DAOの読み込み    
     require_once 'UserDAO.php';
-
+    
     // フラッシュメッセージの取得
     $flash_message = $_SESSION['flash_message'];
     $_SESSION['flash_message'] = null;
