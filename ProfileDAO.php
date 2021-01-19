@@ -1,5 +1,6 @@
 <?php
     require_once 'config.php';
+    require_once 'User.php';
     require_once 'Profile.php';
     
     class ProfileDAO{
@@ -143,4 +144,31 @@
             // プロフィールデータを返す
             return $profile;  
         }
+        
+        public static function get_all_partners($my_gender){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM profiles JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender');
+                // バインド処理
+                $stmt->bindParam(':gender', $my_gender, PDO::PARAM_STR);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Profileクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Profile', array("", "", "", "", "", "", "", "", "", "", "", "", ""));
+                // プロフィールを取得
+                $partners = $stmt->fetchAll();
+
+            }catch(PDOException $e){
+                $partners = null;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            // プロフィールデータを返す
+            return $partners;  
+        }
+    
     }
+    

@@ -83,6 +83,17 @@ textarea{
     padding-left: 34px;
     border-left: solid 5px #999999;
 }
+.partner_avatar{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /*height: auto;*/
+    width: 10vw;
+    height: 10vw;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+}
 table{
     background-color: white;
 }

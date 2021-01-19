@@ -78,6 +78,23 @@
                     </div>
                 </div>   
                 <?php endif; ?>
+            </div>
+            <div class="row">
+                <h2 class="col-sm-12 text-center mt-5">会員一覧</h2>
+            </div>
+            <div class="row">
+                <?php foreach($partners as $profile): ?>
+                <div class="col-sm-3 card mb-2">
+                    <div class="card-header mt-3">
+                        <img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="partner_avatar">
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="text-center"><?= $profile->nickname ?></a><br />
+                        <p class="text-center"><?= $profile->get_user()->age ?>歳</p>
+                        <p class="text-center"><?= $profile->prefecture ?></p>
+                    </div>
+               </div>
+               <?php endforeach; ?>
            </div>
         </div>
         

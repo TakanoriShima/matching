@@ -12,7 +12,7 @@
         <title>Setting</title>
     </head>
     <body>
-        <div class="container mt-3">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-1 mb-2">
                     <a href="top.php" class="home-link"><img src="home.png" class="home"></a>
