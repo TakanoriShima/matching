@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
         <link rel="shortcut icon" href="favicon.ico">
-        <title>My Page</title>
+        <title>会員のプロフィール</title>
     </head>
     <body>
         <div class="container">
@@ -47,62 +47,40 @@
                     <p class="flash_message col-sm-12 mb-2 text-center"><?= $flash_message ?></p>        
                 </div>
                 <?php endif; ?>
-                <?php if($my_profile !== false): ?>
                 <div class="card mt-5">
                     <div class="card-header text-center">
-                        <?= $my_profile->nickname ?>さん のマイページ
+                        <?= $profile->nickname ?>さん のプロフィール
                     </div>
                     <div class="card-body row">
-                        <div class="col-sm-4">
-                            <img src="<?= AVATAR_IMG_DIR . $my_profile->avatar ?>" class="my_avatar">
-                        </div>
-                        <div class="col-sm-2 text-center mt-3">
-                            <?= $my_profile->nickname ?>
+                        <div class="col-sm-6">
+                            <img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="my_avatar">
+                            <?php if($profile->get_user()->login_flag == 0): ?>
+                            <p class="text-center">最終ログイン</p>
+                            <p class="text-center"><?= substr($profile->get_user()->last_login_at, 0, 16) ?> </p>
+                            <?php else: ?>
+                            <p class="text-center"><span class="login">●</span>ログイン中</p>
+                            <?php endif; ?>
                         </div>
                         <div class="col-sm-6">
                             <ul class="my_profile">
-                                <li><?= $my_profile->get_user()->age ?>歳</li>
-                                <li><?= $my_profile->prefecture ?></li>
-                                <li><?= $my_profile->height ?>cm</li>
-                                <li><?= $my_profile->weight ?>kg</li>
-                                <li><?= $my_profile->profession ?></li>
+                                <li><?= substr($profile->get_user()->created_at, 0, 10) ?> 入会</li>
+                                <li><?= $profile->get_user()->age ?>歳</li>
+                                <li><?= $profile->prefecture ?></li>
+                                <li><?= $profile->height ?>cm</li>
+                                <li><?= $profile->weight ?>kg</li>
+                                <li><?= $profile->profession ?></li>
+                                <li><?= $profile->income ?>万円</li>
+                                <li>飲酒:　　<?= $profile->drink ?></li>
+                                <li>喫煙:　　<?= $profile->smoking ?></li>
+                                <li>私のタイプ:　　<?= $profile->my_type ?></li>
+                                <li>好きな異性のタイプ:　　<?= $profile->favorite_type ?></li>
+                                <li>自己紹介:　　<?= $profile->introduction ?></li>
                             </ul>
                         </div>
                         
                     </div>
                 </div>
-                <?php else: ?>
-                <div class="row mt-5">
-                    <div class="col-sm-12 text-center">
-                        <a href="setting.php">プロフィールが、未設定です</a>
-                    </div>
-                </div>   
-                <?php endif; ?>
             </div>
-            <div class="row">
-                <h2 class="col-sm-12 text-center mt-5">会員一覧</h2>
-            </div>
-            <div class="row">
-                <?php foreach($partners as $profile): ?>
-                <div class="col-sm-3 card mb-2">
-                    <div class="card-header mt-3">
-                        <img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="partner_avatar">
-                    </div>
-                    <div class="card-body">
-                        <a href="show_user.php?id=<?= $profile->id ?>" class="text-center"><?= $profile->nickname ?></a><br />
-                        <p class="text-center"><?= $profile->get_user()->age ?>歳</p>
-                        <p class="text-center"><?= $profile->prefecture ?></p>
-                        <p class="text-center"><?= substr($profile->get_user()->created_at, 0, 10) ?> 入会</p>
-                        <?php if($profile->get_user()->login_flag == 0): ?>
-                        <p class="text-center">最終ログイン</p>
-                        <p class="text-center"><?= substr($profile->get_user()->last_login_at, 0, 16) ?> </p>
-                        <?php else: ?>
-                        <p class="text-center"><span class="login">●</span>ログイン中</p>
-                        <?php endif; ?>
-                    </div>
-               </div>
-               <?php endforeach; ?>
-           </div>
         </div>
         
         <!-- Optional JavaScript -->
