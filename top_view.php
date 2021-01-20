@@ -92,6 +92,8 @@
                         <a href="#" class="text-center"><?= $profile->nickname ?></a><br />
                         <p class="text-center"><?= $profile->get_user()->age ?>歳</p>
                         <p class="text-center"><?= $profile->prefecture ?></p>
+                        <p class="text-center"><?= substr($profile->get_user()->created_at, 0, 10) ?> 入会</p>
+                        
                     </div>
                </div>
                <?php endforeach; ?>
