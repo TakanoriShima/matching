@@ -192,6 +192,7 @@
                         $now = date("Y-m-d H:i:s");
                         // UPDATE文実行準備（ログインフラグをONに）
                         $stmt = $pdo->prepare('UPDATE users SET last_login_at=:last_login_at, login_flag=1 WHERE id=:id');
+                        // $stmt = $pdo->prepare('UPDATE users SET login_flag=1 WHERE id=:id');
                         // バインド処理（上のあやふやな部分は実はこれでした）
                         $stmt->bindValue(':last_login_at', $now, PDO::PARAM_STR);
                         $stmt->bindParam(':id', $user->id, PDO::PARAM_INT);

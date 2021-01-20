@@ -150,7 +150,7 @@
                 // データベース接続
                 $pdo = self::get_connection();
                 // SELECT文実行準備
-                $stmt = $pdo->prepare('SELECT * FROM profiles JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender ORDER BY users.created_at DESC');
+                $stmt = $pdo->prepare('SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender ORDER BY users.created_at DESC');
                 // バインド処理
                 $stmt->bindParam(':gender', $my_gender, PDO::PARAM_STR);
                 // SELECT文本番実行
