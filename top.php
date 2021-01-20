@@ -20,6 +20,8 @@
     
     // 異性の会員一覧取得
     $partners = ProfileDAO::get_all_partners($me->gender);
+    // 現在ログイン中の異性の会員一覧取得
+    // $partners = ProfileDAO::get_login_partners($me->gender);
     
     // Viewの読み込み
     include_once 'top_view.php';

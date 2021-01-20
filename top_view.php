@@ -93,7 +93,12 @@
                         <p class="text-center"><?= $profile->get_user()->age ?>歳</p>
                         <p class="text-center"><?= $profile->prefecture ?></p>
                         <p class="text-center"><?= substr($profile->get_user()->created_at, 0, 10) ?> 入会</p>
-                        
+                        <?php if($profile->get_user()->login_flag == 0): ?>
+                        <p class="text-center">最終ログイン</p>
+                        <p class="text-center"><?= substr($profile->get_user()->last_login_at, 0, 16) ?> </p>
+                        <?php else: ?>
+                        <p class="text-center"><span class="login">●</span>ログイン中</p>
+                        <?php endif; ?>
                     </div>
                </div>
                <?php endforeach; ?>

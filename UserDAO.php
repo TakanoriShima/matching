@@ -190,8 +190,8 @@
                         // 現在時刻の取得
                         date_default_timezone_set('Asia/Tokyo');
                         $now = date("Y-m-d H:i:s");
-                        // UPDATE文実行
-                        $stmt = $pdo->prepare('UPDATE users SET last_login_at=:last_login_at WHERE id=:id');
+                        // UPDATE文実行準備（ログインフラグをONに）
+                        $stmt = $pdo->prepare('UPDATE users SET last_login_at=:last_login_at, login_flag=1 WHERE id=:id');
                         // バインド処理（上のあやふやな部分は実はこれでした）
                         $stmt->bindValue(':last_login_at', $now, PDO::PARAM_STR);
                         $stmt->bindParam(':id', $user->id, PDO::PARAM_INT);
@@ -210,5 +210,26 @@
                 self::close_connection($pdo, $stmt);
             }
         }
+        
+        // ログアウト（ログインフラッグをOFFにセット）
+        public static function logout($user_id){
+            
+            try{
+                // データベースに接続
+                $pdo = self::get_connection();
+                // UPDATE 文実行準備
+                $stmt = $pdo->prepare('UPDATE users SET login_flag=0 WHERE id=:id');
+                // バインド処理（上のあやふやな部分は実はこれでした）
+                $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
+                // UPDATE文本番実行
+                $stmt->execute();
+
+            }catch(PDOException $e){
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+        }
+        
         
     }

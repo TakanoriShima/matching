@@ -94,6 +94,11 @@ textarea{
     margin: 0 auto;
     padding: 5px;
 }
+.login{
+    color: red;
+    font-size: 20px;
+    margin-right: 5px;
+}
 table{
     background-color: white;
 }
