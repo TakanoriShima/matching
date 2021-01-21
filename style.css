@@ -30,11 +30,15 @@ body{
 
 a{
     display: block;
-    color: #222222;
     text-decoration: none;
+}
+
+
+header a{
+    color: #222222;
     padding: 3px;
 }
-a:hover{
+header a:hover{
     color: red;
     border-bottom: solid 2px red;
     text-decoration: none;
@@ -44,7 +48,7 @@ a:hover{
     -o-transition: all 0.3s ease;
     transition: all  0.3s ease;
 }
-a.home-link:hover{
+header a.home-link:hover{
     background-color: #fb616100;
     border-bottom: none;
 }

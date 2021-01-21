@@ -10,6 +10,21 @@
         <link rel="stylesheet" href="style.css">
         <link rel="shortcut icon" href="favicon.ico">
         <title>会員のプロフィール</title>
+        <style>
+            .overlay {
+                position: absolute;
+                display: none;
+                top: 0;
+                width: 100%;
+                z-index: 1;
+                background-color: rgba(0,0,0,0.6);
+            }
+            .overlay img {
+                display: inline-block;
+                position: absolute;
+                border: 5px solid #fff;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -53,7 +68,7 @@
                     </div>
                     <div class="card-body row">
                         <div class="col-sm-6">
-                            <img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="my_avatar">
+                            <a class="img_popup" width="600" height="300"><img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="my_avatar"></a></div>
                             <?php if($profile->get_user()->login_flag == 0): ?>
                             <p class="text-center">最終ログイン</p>
                             <p class="text-center"><?= substr($profile->get_user()->last_login_at, 0, 16) ?> </p>
@@ -89,5 +104,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+        <script>
+            $(function() {
+                $('body').prepend('<div class="overlay"></div>');
+                
+                $('a.img_popup').click(function() {
+                var left = ($(window).width() / 2) + $(window).scrollLeft() - ($(this).attr('width') / 2);
+                var top = ($(window).height() / 2) + $(window).scrollTop() - ($(this).attr('height') / 2);
+                
+                $('div.overlay').css('height', $(document).height());
+                $('.overlay').empty().append('<img src="' + $($(this).children('img')).attr('src') + '" />').css({display: 'block'});
+                
+               
+                $('div.overlay img').css({left: left, top: top, opacity: '1'});
+                    return false;
+                });
+                
+                $('div.overlay').click(function() {
+                    $('div.overlay').hide();
+                });
+            });
+        </script>
     </body>
 </html>
