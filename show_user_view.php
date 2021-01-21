@@ -68,7 +68,7 @@
                     </div>
                     <div class="card-body row">
                         <div class="col-sm-6">
-                            <a class="img_popup" width="600" height="300"><img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="my_avatar"></a></div>
+                            <a class="img_popup" width="<?= $profile->get_avatar_info()[0] ?>" height="<?= $profile->get_avatar_info()[1] ?>"><img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="my_avatar"></a></div>
                             <?php if($profile->get_user()->login_flag == 0): ?>
                             <p class="text-center">最終ログイン</p>
                             <p class="text-center"><?= substr($profile->get_user()->last_login_at, 0, 16) ?> </p>
