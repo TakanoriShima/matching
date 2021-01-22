@@ -25,7 +25,7 @@
                 <!-- メニュー項目 -->
                 <div class="collapse navbar-collapse col-sm-10 row" id="nav-bar">
                     <ul class="navbar-nav col-sm-12">
-                        <li class="nav-item active col-sm-2"><a href="" class="text-center">検索</a></li>
+                        <li class="nav-item active col-sm-2"><a href="search.php" class="text-center">検索</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">メッセージ</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">掲示板</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">お気に入り</a></li>
@@ -79,6 +79,10 @@
             <div class="row">
                 <h2 class="col-sm-12 text-center mt-5">会員一覧</h2>
             </div>
+            <?php if(count($partners) !== 0): ?>
+            <div class="row">
+                <div class="col-sm-12 mb-3"><?= count($partners) ?>人</div>
+            </div>
             <div class="row">
                 <?php foreach($partners as $profile): ?>
                 <div class="col-sm-3 card mb-2">
@@ -86,7 +90,7 @@
                         <img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="partner_avatar">
                     </div>
                     <div class="card-body">
-                        <a href="show_user.php?id=<?= $profile->id ?>" class="text-center"><?= $profile->nickname ?></a><br />
+                        <a href="show_user.php?id=<?= $profile->id ?>" class="text-center"><?= $profile->nickname ?></a>
                         <p class="text-center"><?= $profile->get_user()->age ?>歳</p>
                         <p class="text-center"><?= $profile->prefecture ?></p>
                         <p class="text-center"><?= substr($profile->get_user()->created_at, 0, 10) ?> 入会</p>
@@ -100,6 +104,11 @@
                </div>
                <?php endforeach; ?>
            </div>
+           <?php else: ?>
+           <div class="row">
+               <div class="col-sm-12 text-center">該当会員はいません</div>
+           </div>
+           <?php endif; ?>
         </div>
         
         <!-- Optional JavaScript -->

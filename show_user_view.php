@@ -89,10 +89,9 @@
                                 <li>喫煙:　　<?= $profile->smoking ?></li>
                                 <li>私のタイプ:　　<?= $profile->my_type ?></li>
                                 <li>好きな異性のタイプ:　　<?= $profile->favorite_type ?></li>
-                                <li>自己紹介:　　<?= $profile->introduction ?></li>
+                                <li>自己紹介:　　<p><?= str_replace("\n", "<br>", $profile->introduction) ?></p></li>
                             </ul>
                         </div>
-                        
                     </div>
                 </div>
             </div>

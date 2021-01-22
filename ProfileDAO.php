@@ -145,6 +145,7 @@
             return $profile;  
         }
         
+        // 異性の全会員のプロフィールを取得
         public static function get_all_partners($my_gender){
             try{
                 // データベース接続
@@ -170,6 +171,7 @@
             return $partners;  
         }
         
+        // ログイン中の異性の全会員情報を取得
         public static function get_login_partners($my_gender){
             try{
                 // データベース接続
@@ -178,6 +180,33 @@
                 $stmt = $pdo->prepare('SELECT * FROM profiles JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender AND users.login_flag=1 ORDER BY users.created_at DESC');
                 // バインド処理
                 $stmt->bindParam(':gender', $my_gender, PDO::PARAM_STR);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Profileクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Profile', array("", "", "", "", "", "", "", "", "", "", "", "", ""));
+                // プロフィールを取得
+                $partners = $stmt->fetchAll();
+
+            }catch(PDOException $e){
+                $partners = null;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            // プロフィールデータを返す
+            return $partners;  
+        }
+        
+        // 異性のプロフィール検索
+        public static function search_profiles($conditions, $my_gender){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender AND profiles.prefecture=:prefecture ORDER BY users.created_at DESC');
+                // バインド処理
+                $stmt->bindParam(':gender', $my_gender, PDO::PARAM_STR);
+                $stmt->bindParam(':prefecture', $conditions['prefecture'], PDO::PARAM_STR);
                 // SELECT文本番実行
                 $stmt->execute();
                 // フェッチの結果を、Profileクラスのインスタンスにマッピングする
