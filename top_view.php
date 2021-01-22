@@ -13,35 +13,32 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-1 mb-2">
-                    <a href="top.php" class="home-link"><img src="home.png" class="home"></a>
+            <header class="navbar navbar-expand-sm navbar-light bg-light row col-sm-12">
+                <!-- ホームへ戻るリンク。ブランドロゴなどを置く。 -->
+                <a href="top.php" class="home-link col-sm-2 mb-1 mr-1"><img src="home.png" class="home"></a>
+    
+                <!-- 横幅が狭いときに出るハンバーガーボタン -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <!-- メニュー項目 -->
+                <div class="collapse navbar-collapse col-sm-10 row" id="nav-bar">
+                    <ul class="navbar-nav col-sm-12">
+                        <li class="nav-item active col-sm-2"><a href="" class="text-center">検索</a></li>
+                        <li class="nav-item col-sm-2"><a href="" class="text-center">メッセージ</a></li>
+                        <li class="nav-item col-sm-2"><a href="" class="text-center">掲示板</a></li>
+                        <li class="nav-item col-sm-2"><a href="" class="text-center">お気に入り</a></li>
+                        <?php if($my_profile === false): ?>
+                        <li class="nav-item col-sm-2"><a href="setting.php" class="text-center">設定</li>
+                        <?php else: ?>
+                        <li class="nav-item col-sm-2"><a href="setting.php" class="text-center">設定変更</a></li>
+                        <?php endif; ?>
+                        <li class="nav-item col-sm-2"><a href="logout.php" class="text-center">ログアウト</a></li>
+                    </ul>
                 </div>
-            </div>
-           <header class="row">
-               <div class="col-sm-2">
-                   <a href="" class="text-center">検索</a>
-               </div>
-               <div class="col-sm-2">
-                   <a href="" class="text-center">メッセージ</a>
-               </div>
-               <div class="col-sm-2">
-                   <a href="" class="text-center">掲示板</a>
-               </div>
-               <div class="col-sm-2">
-                   <a href="" class="text-center">お気に入り</a>
-               </div>
-               <?php if($my_profile === false): ?>
-               <div class="col-sm-2">
-                   <a href="setting.php" class="text-center">設定</a>
-               </div>
-               <?php endif; ?>
-               
-               <div class="col-sm-2">
-                   <a href="logout.php" class="text-center">ログアウト</a>
-               </div>
-           </header>
-           <div class="wrapper">
+            </header>
+            <div class="wrapper">
                 <?php if($flash_message): ?>
                 <div class="row mt-2">
                     <p class="flash_message col-sm-12 mb-2 text-center"><?= $flash_message ?></p>        
