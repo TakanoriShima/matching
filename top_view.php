@@ -38,14 +38,14 @@
                     </ul>
                 </div>
             </header>
-            <div class="wrapper">
+            <div class="wrapper mt-2">
                 <?php if($flash_message): ?>
                 <div class="row mt-2">
-                    <p class="flash_message col-sm-12 mb-2 text-center"><?= $flash_message ?></p>        
+                    <p class="flash_message col-sm-12 mb-2 text-center mt-4"><?= $flash_message ?></p>        
                 </div>
                 <?php endif; ?>
                 <?php if($my_profile !== false): ?>
-                <div class="card mt-5">
+                <div class="card mt-4">
                     <div class="card-header text-center">
                         <?= $my_profile->nickname ?>さん のマイページ
                     </div>

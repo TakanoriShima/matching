@@ -40,7 +40,7 @@
            </header>
            <div class="wrapper mt-3">
                 <div class="row mt-3">
-                    <h1 class="col-sm-12 text-center">プロフィール検索</h1>
+                    <h1 class="col-sm-12 text-center mt-4">プロフィール検索</h1>
                 </div>
                 <?php if(count($errors) !== 0): ?>
                 <ul class="row mt-2">

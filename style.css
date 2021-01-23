@@ -9,7 +9,12 @@ body{
     background-color: #fb617c24;
     min-height: 100%; 
 }
-
+header.navbar.navbar-expand-sm.navbar-light.bg-light.row.col-sm-12 {
+    margin-left: 0;
+}
+a.home-link.col-sm-2.mb-1.mr-1 {
+    width: 100px;
+}
 .flash_message{
     color: blue;
     background-color: skyblue;
@@ -72,13 +77,21 @@ small{
 textarea{
     color: red;
 }
-.my_avatar{
+.avatar{
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
     /*height: auto;*/
     width: 25vw;
     height: 25vw;
+}
+.my_avatar{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /*height: auto;*/
+    width: 20vw;
+    height: 20vw;
 }
 .my_profile{
     list-style-type: none;

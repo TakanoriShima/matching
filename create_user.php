@@ -29,6 +29,9 @@
     }else{ // 入力エラーがあれば
         // エラーメッセージのセット
         $_SESSION['errors'] = $errors;
+        $_SESSION['gender'] = $gender;
+        $_SESSION['age'] = $age;
+        $_SESSION['email'] = $email;
         header('Location: signup.php');
         exit;
     }

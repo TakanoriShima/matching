@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-1 mb-2">
-                    <a href="top.php" class="home-link"><img src="home.png" class="home"></a>
+                    <a href="index.php" class="home-link"><img src="home.png" class="home"></a>
                 </div>
             </div>
             <div class="row mt-3">
