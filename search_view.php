@@ -49,7 +49,7 @@
                     <?php endforeach; ?>
                 </ul>
                 <?php endif; ?>
-                <form action="profile_search.php" method="POST" class="mt-5">
+                <form action="profile_search.php" method="GET" class="mt-5">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">年齢</label>
                         <div class="col-sm-4 pt-2">
@@ -279,8 +279,11 @@
                 
                     <!-- 1行 -->
                     <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary col-sm-12 profile_btn">検索</button>
+                        <div class="offset-sm-2 col-sm-3 mb-3">
+                            <button type="submit" name="btn_type" value="search" class="btn btn-primary col-sm-12 profile_btn">検索</button>
+                        </div>
+                        <div class="offset-sm-2 col-sm-3">
+                            <button type="submit" name="btn-type" value="reset" class="btn btn-danger col-sm-12 profile_btn">リセット</button>
                         </div>
                     </div>
                 </form>

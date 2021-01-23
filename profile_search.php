@@ -13,12 +13,22 @@
     
     // 会員情報の取得
     $me = UserDAO::get_user_by_id($user_id);
-
+    
     // プロフィール情報の取得
     $my_profile = ProfileDAO::get_profile_by_id($user_id); 
     
-    // 検索にヒットする異性の会員情報取得
-    $partners = ProfileDAO::search_profiles($_POST, $me->gender);
+    if($_GET['btn_type'] === 'search'){
+        // 検索にヒットする異性の会員情報取得
+        $partners = ProfileDAO::search_profiles($_GET, $me->gender);
+        // var_dump($partners);
+        
+        // Viewの読み込み
+        include_once 'top_view.php';
+    }else{
+        header('Location: search.php');
+        exit;
+    }
+
     
-    // Viewの読み込み
-    include_once 'top_view.php';
+    
+    

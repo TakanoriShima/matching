@@ -203,12 +203,76 @@
                 // データベース接続
                 $pdo = self::get_connection();
                 // SELECT文実行準備
-                $stmt = $pdo->prepare('SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id WHERE users.gender != :gender AND profiles.prefecture=:prefecture ORDER BY users.created_at DESC');
-                // バインド処理
-                $stmt->bindParam(':gender', $my_gender, PDO::PARAM_STR);
-                $stmt->bindParam(':prefecture', $conditions['prefecture'], PDO::PARAM_STR);
-                // SELECT文本番実行
-                $stmt->execute();
+                $sql = "SELECT * FROM profiles INNER JOIN users ON profiles.user_id = users.id WHERE users.gender != '{$my_gender}'";
+                
+                // 年齢下限
+                if($conditions['age_lower'] !== '0'){
+                    $sql .= " AND {$conditions['age_lower']} <= users.age";
+                }
+                // 年齢上限
+                if($conditions['age_upper'] !== '0'){
+                    $sql .= " AND users.age <= {$conditions['age_upper']}";
+                }
+                
+                // 都道府県
+                if($conditions['prefecture'] !== '0'){
+                    $sql .= " AND profiles.prefecture = '{$conditions['prefecture']}'";
+                }
+                
+                // 身長下限
+                if($conditions['height_lower'] !== '0'){
+                    $sql .= " AND {$conditions['height_lower']} <= profiles.height";
+                }
+                // 身長上限
+                if($conditions['height_upper'] !== '0'){
+                    $sql .= " AND profiles.height <= {$conditions['height_upper']}";
+                }
+                
+                // 体重下限
+                if($conditions['weight_lower'] !== '0'){
+                    $sql .= " AND {$conditions['weight_lower']} <= profiles.weight";
+                }
+                // 体重上限
+                if($conditions['weight_upper'] !== '0'){
+                    $sql .= " AND profiles.weight <= {$conditions['weight_upper']}";
+                }
+                
+                // 職業
+                if($conditions['profession'] !== '0'){
+                    $sql .= " AND profiles.profession = '{$conditions['profession']}'";
+                }
+                
+                // 収入
+                if($conditions['income'] !== '0'){
+                    $sql .= " AND profiles.income = '{$conditions['income']}'";
+                }
+                
+                // 飲酒
+                if($conditions['drink'] !== '0'){
+                    $sql .= " AND profiles.drink = '{$conditions['drink']}'";
+                }
+                
+                // 喫煙
+                if($conditions['smoking'] !== '0'){
+                    $sql .= " AND profiles.smoking = '{$conditions['smoking']}'";
+                }
+                
+                // 希望のタイプ
+                if($conditions['favorite_type'] !== '0'){
+                    $sql .= " AND profiles.favorite_type = '{$conditions['favorite_type']}'";
+                }
+                
+                // フリーキーワード
+                if($conditions['keyword'] !== '0'){
+                    $sql .= " AND profiles.introduction LIKE '%{$conditions['keyword']}%'";
+                }
+                
+                $sql .= " ORDER BY users.created_at DESC";
+                // print $sql;
+                
+                // SELECT文実行
+                $stmt = $pdo->query($sql);
+                
                 // フェッチの結果を、Profileクラスのインスタンスにマッピングする
                 $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Profile', array("", "", "", "", "", "", "", "", "", "", "", "", ""));
                 // プロフィールを取得
