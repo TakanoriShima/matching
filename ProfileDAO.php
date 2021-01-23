@@ -90,7 +90,7 @@
             if($profile->favorite_type === '0'){
                 $errors[] = '相手の希望を選択してください';
             }
-            if($profile->introduction === '0'){
+            if($profile->introduction === ''){
                 $errors[] = '自己紹介文を入力してください';
             }
 

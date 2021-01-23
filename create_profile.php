@@ -24,12 +24,19 @@
     $errors = ProfileDAO::validate($profile);
     // 入力エラーが無ければ
     if(count($errors) === 0){
+        // プロフィール登録実行
         ProfileDAO::insert($profile);
+        // フラッシュメッセージをセッションに保存
         $_SESSION['flash_message'] = 'プロフィール登録を完了しました';
+        // 画面遷移
         header('Location: top.php');
         exit;
     }else{ // 入力エラーがあれば
+        // エラーメッセージ配列をセッションの保存
         $_SESSION['errors'] = $errors;
+        // 入力値をセッションに保存
+        $_SESSION['input_values'] = $_POST;
+        // 画面遷移
         header('Location: setting.php');
         exit;
     }
