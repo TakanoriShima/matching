@@ -41,4 +41,12 @@
             $user = UserDAO::get_user_by_id($this->id);
             return $user;
         }
+        
+        // アバター画像のサイズ取得
+        // ref) https://webkaru.net/php/function-getimagesize/
+        public function get_avatar_info(){
+            $avatar_filename = AVATAR_IMG_DIR .  $this->avatar;
+            $avatar_info = getimagesize($avatar_filename);
+            return $avatar_info;
+        }
     }

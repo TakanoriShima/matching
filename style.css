@@ -93,6 +93,14 @@ textarea{
     width: 20vw;
     height: 20vw;
 }
+.edit_avatar{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /*height: auto;*/
+    width: 10vw;
+    height: 10vw;
+}
 .my_profile{
     list-style-type: none;
     padding-left: 10px;

@@ -29,11 +29,7 @@
                         <li class="nav-item col-sm-2"><a href="" class="text-center">メッセージ</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">掲示板</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">お気に入り</a></li>
-                        <?php if($my_profile === false): ?>
-                        <li class="nav-item col-sm-2"><a href="setting.php" class="text-center">設定</li>
-                        <?php else: ?>
-                        <li class="nav-item col-sm-2"><a href="setting.php" class="text-center">設定変更</a></li>
-                        <?php endif; ?>
+                        <li class="nav-item col-sm-2"><a href="" class="text-center">あしあと</a></li>
                         <li class="nav-item col-sm-2"><a href="logout.php" class="text-center">ログアウト</a></li>
                     </ul>
                 </div>
@@ -54,7 +50,14 @@
                             <img src="<?= AVATAR_IMG_DIR . $my_profile->avatar ?>" class="my_avatar">
                         </div>
                         <div class="col-sm-2 text-center mt-3">
-                            <?= $my_profile->nickname ?>
+                            <div class="row">
+                                <p class="col-sm-12"><?= $my_profile->nickname ?></p>
+                                <?php if($my_profile === false): ?>
+                                <p class="col-sm-12"><a href="setting.php" class="text-center">設定</p>
+                                <?php else: ?>
+                                <p class="col-sm-12"><a href="edit_profile.php" class="text-center">設定変更</a></p>
+                                <?php endif; ?>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <ul class="my_profile">
