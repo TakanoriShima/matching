@@ -309,7 +309,6 @@
             }
             
             $(function(){
-                // alert("a");
                 $('#introduction').keyup(function() {
                     let cnt = (this).val().length;
                     $('.showCnt').text(cnt);

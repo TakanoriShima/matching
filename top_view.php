@@ -29,7 +29,7 @@
                         <li class="nav-item col-sm-2"><a href="" class="text-center">メッセージ</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">掲示板</a></li>
                         <li class="nav-item col-sm-2"><a href="" class="text-center">お気に入り</a></li>
-                        <li class="nav-item col-sm-2"><a href="" class="text-center">あしあと</a></li>
+                        <li class="nav-item col-sm-2"><a href="footprints.php" class="text-center">あしあと</a></li>
                         <li class="nav-item col-sm-2"><a href="logout.php" class="text-center">ログアウト</a></li>
                     </ul>
                 </div>

@@ -1,6 +1,8 @@
 <?php
     require_once 'config.php';
     require_once 'User.php';
+    require_once 'ProfileDAO.php';
+    
     // DAO
     class UserDAO{
         // データベースと接続
@@ -66,6 +68,33 @@
             }
             // 会員データを返す
             return $user;  
+        }
+        
+        
+        // 会員番号からプロフィール情報を取得
+        public static function get_profile_by_id($user_id){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM profiles WHERE user_id=:user_id');
+                // バインド処理
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Profile', array("", "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
+                // プロフィール情報を取得
+                $profile = $stmt->fetch();
+
+            }catch(PDOException $e){
+                $profile =  null;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            // プロフィールデータを返す
+            return $profile;  
         }
         
         // usersテーブルに新規にデータを追加
