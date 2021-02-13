@@ -1,6 +1,9 @@
 <?php
-    session_start();
+    // 不正アクセス防止
+    require_once 'login_filter.php';
+    
     require_once 'UserDAO.php';
+    session_start();
     
     // セッションから会員番号を取得
     $user_id = $_SESSION['user_id']; 

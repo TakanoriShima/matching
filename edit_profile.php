@@ -1,9 +1,12 @@
 <?php
-    session_start();
+    // 不正アクセス防止
+    require_once 'login_filter.php';
+    
     require_once 'ProfileDAO.php';
     require_once 'UserDAO.php';
     
-    // セッションから会員番号取得
+    session_start();
+    
     $user_id = $_SESSION['user_id'];
     $user = UserDAO::get_user_by_id($user_id);
     $profile = ProfileDAO::get_profile_by_id($user_id);

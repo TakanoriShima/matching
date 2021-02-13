@@ -1,5 +1,7 @@
 <?php
     require_once 'UserDAO.php';
+    require_once 'FavoriteDAO.php';
+    
     class Profile{
         // プロパティ
         public $id;
@@ -48,5 +50,11 @@
             $avatar_filename = AVATAR_IMG_DIR .  $this->avatar;
             $avatar_info = getimagesize($avatar_filename);
             return $avatar_info;
+        }
+        
+        // 自分に対する全いいね情報を取得
+        public function get_my_all_favorited(){
+            $my_all_favorited = FavoriteDAO::get_my_all_favorited($this->user_id);
+            return $my_all_favorited;
         }
     }

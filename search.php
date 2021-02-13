@@ -1,4 +1,7 @@
 <?php
+    // 不正アクセス防止
+    require_once 'login_filter.php';
+    
     require_once 'UserDAO.php';
     require_once 'ProfileDAO.php';
 

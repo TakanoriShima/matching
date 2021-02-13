@@ -24,6 +24,11 @@
                 <p class="flash_message col-sm-12 mb-2 text-center"><?= $flash_message ?></p>        
             </div>
             <?php endif; ?>
+            <?php if($error_message): ?>
+            <div class="row mt-2">
+                <p class="error_message col-sm-12 mb-2 text-center"><?= $error_message ?></p>        
+            </div>
+            <?php endif; ?>
             <?php if(count($users) !== 0){ ?>
             <h4>全会員数： <?= count($users) ?>&nbsp;人</h4>
             <div class="row mt-2">

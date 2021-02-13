@@ -1,7 +1,9 @@
 <?php
-    session_start();
+    // 不正アクセス防止
+    require_once 'post_filter.php';
+    
     require_once 'UserDAO.php';
-
+    session_start();
     
     // 入力フォームから値を取得
     $email = $_POST['email'];

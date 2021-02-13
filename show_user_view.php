@@ -67,7 +67,7 @@
                         <?= $profile->nickname ?>さん のプロフィール
                     </div>
                     <div class="card-body row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <a class="img_popup" width="<?= $profile->get_avatar_info()[0] ?>" height="<?= $profile->get_avatar_info()[1] ?>"><img src="<?= AVATAR_IMG_DIR . $profile->avatar ?>" class="avatar"></a></div>
                             <?php if($profile->get_user()->login_flag == 0): ?>
                             <p class="text-center">最終ログイン</p>
@@ -75,6 +75,21 @@
                             <?php else: ?>
                             <p class="ml-3 mt-2 text-center"><span class="login">●</span>ログイン中</p>
                             <?php endif; ?>
+                            <div class="col-sm-4">
+                                <div class="offset-sm-2 col-sm-6">
+                                    <?php if($favorite_flag === false): ?> 
+                                    <form action="create_favorite.php" method="POST">
+                                        <input type="hidden" name="favorited_user_id" value="<?= $profile->get_user()->id ?>">
+                                        <button type="submit">いいね</button>
+                                    </form>
+                                    <?php else: ?>
+                                    <form action="delete_favorite.php" method="POST">
+                                        <input type="hidden" name="favorited_user_id" value="<?= $profile->get_user()->id ?>">
+                                        <button type="submit">いいね解除</button>
+                                    </form>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <ul class="my_profile">

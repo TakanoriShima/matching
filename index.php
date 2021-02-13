@@ -6,6 +6,11 @@
     // フラッシュメッセージの取得
     $flash_message = $_SESSION['flash_message'];
     $_SESSION['flash_message'] = null;
+    
+    // エラーメッセージの取得
+    $error_message = $_SESSION['error_message'];
+    $_SESSION['erro_message'] = null;
+    
     session_destroy();
 
     // 全会員データ取得

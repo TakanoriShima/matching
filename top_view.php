@@ -103,6 +103,7 @@
                         <?php else: ?>
                         <p class="text-center"><span class="login">●</span>ログイン中</p>
                         <?php endif; ?>
+                        <p class="text-center color-red"><?= count($profile->get_my_all_favorited()) ?>いいね</p>
                     </div>
                </div>
                <?php endforeach; ?>
