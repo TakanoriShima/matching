@@ -136,7 +136,7 @@
                             <select name="height" class="form-control">
                                 <option value="0">選択してください</option>
                             <?php for($i = 150; $i <= 200; $i++): ?>
-                                <option value="<?= $i ?>" <?php if($i === (int)$profile->height): ?>selected<?php endif; ?>><?= $profile->height ?>cm</option>
+                                <option value="<?= $i ?>" <?php if($i === (int)$profile->height): ?>selected<?php endif; ?>><?= $i ?>cm</option>
                             <?php endfor;?>
                             </select>
                         </div>

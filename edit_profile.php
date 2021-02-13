@@ -10,6 +10,8 @@
     $user_id = $_SESSION['user_id'];
     $user = UserDAO::get_user_by_id($user_id);
     $profile = ProfileDAO::get_profile_by_id($user_id);
-    // var_dump($profile);
+    $errors = $_SESSION['errors'];
+    $_SESSION['errors'] = null;
+
     include_once 'edit_profile_view.php';
     

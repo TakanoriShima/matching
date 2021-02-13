@@ -60,15 +60,19 @@
         }
         
         // 入力チェック
-        public static function validate($profile){
+        public static function validate($profile, $image_check_flag){
             $errors = array();
             
             if($profile->nickname === ''){
                 $errors[] = 'ニックネームを入力してください';
             }
-            if (empty($_FILES['avatar']['name'])) {
-                $errors[] = 'アバター画像を選択してください';     
+            
+            if($image_check_flag === 1){
+                if (empty($_FILES['avatar']['name'])) {
+                    $errors[] = 'アバター画像を選択してください';     
+                }
             }
+            
             if($profile->prefecture === '0'){
                 $errors[] = '都道府県を選択してください';
             }
@@ -95,6 +99,55 @@
             }
 
             return $errors;
+        }
+        
+        // profilesテーブル情報を更新
+        public static function update($profile){
+            $avatar = "";
+            try{
+                try{
+                    $avatar = self::upload();
+                }catch(Exception $e){
+                    
+                }
+                // データベースに接続
+                $pdo = self::get_connection();
+                
+                // INSERT文準備
+                $sql = 'UPDATE profiles SET nickname=:nickname, prefecture=:prefecture, height=:height, weight=:weight, profession=:profession, income=:income, drink=:drink, smoking=:smoking, my_type=:my_type, favorite_type=:favorite_type, introduction=:introduction ';
+                // 画像を更新するのであれば
+                if($avatar !== null){
+                    $sql .= ', avatar=:avatar ';
+                }
+                $sql .= 'WHERE user_id=:user_id';
+                // print $sql;
+                
+                $stmt = $pdo->prepare($sql);
+                // // バインド処理（上のあやふやな部分は実はこれでした）
+                $stmt->bindParam(':user_id', $profile->user_id, PDO::PARAM_INT);
+                $stmt->bindParam(':nickname', $profile->nickname, PDO::PARAM_STR);
+                if($avatar !== null){
+                    $stmt->bindParam(':avatar', $avatar, PDO::PARAM_STR);
+                }
+                $stmt->bindParam(':prefecture', $profile->prefecture, PDO::PARAM_STR);
+                $stmt->bindParam(':height', $profile->height, PDO::PARAM_INT);
+                $stmt->bindParam(':weight', $profile->weight, PDO::PARAM_INT);
+                $stmt->bindParam(':profession', $profile->profession, PDO::PARAM_STR);
+                $stmt->bindParam(':income', $profile->income, PDO::PARAM_STR);
+                $stmt->bindParam(':drink', $profile->drink, PDO::PARAM_STR);
+                $stmt->bindParam(':smoking', $profile->smoking, PDO::PARAM_STR);
+                $stmt->bindParam(':my_type', $profile->my_type, PDO::PARAM_STR);
+                $stmt->bindParam(':favorite_type', $profile->favorite_type, PDO::PARAM_STR);
+                $stmt->bindParam(':introduction', $profile->introduction, PDO::PARAM_STR);
+                
+                // UPDATE本番実行
+                $stmt->execute();
+                    
+            }catch(PDOException $e){
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
         }
         
         

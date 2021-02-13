@@ -26,7 +26,7 @@
     // 新規プロフィールインスタンスの生成
     $profile = new Profile($user_id, $nickname, $prefecture, $height, $weight, $profession, $income, $drink, $smoking, $my_type, $favorite_type, $introduction);
     // 入力チェック
-    $errors = ProfileDAO::validate($profile);
+    $errors = ProfileDAO::validate($profile, 1);
     // 入力エラーが無ければ
     if(count($errors) === 0){
         // プロフィール登録実行

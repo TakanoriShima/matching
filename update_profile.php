@@ -29,23 +29,25 @@
     $profile = new Profile($user_id, $nickname, $prefecture, $height, $weight, $profession, $income, $drink, $smoking, $my_type, $favorite_type, $introduction);
     
     // 入力チェック
-    $errors = ProfileDAO::validate($profile);
-    // 入力エラーが無ければ
+    $errors = ProfileDAO::validate($profile, 0);
+    
+    //入力エラーが無ければ
     if(count($errors) === 0){
         // プロフィール登録実行
         ProfileDAO::update($profile);
-        // フラッシュメッセージをセッションに保存
+        //フラッシュメッセージをセッションに保存
         $_SESSION['flash_message'] = 'プロフィールの編集を完了しました';
         // 画面遷移
         header('Location: top.php');
         exit;
     }else{ // 入力エラーがあれば
-        // エラーメッセージ配列をセッションの保存
+        //エラーメッセージ配列をセッションの保存
         $_SESSION['errors'] = $errors;
         // 入力値をセッションに保存
-        $_SESSION['input_values'] = $_POST;
+        // $_SESSION['input_values'] = $_POST;
+        // $_SESSION['']
         // 画面遷移
-        header('Location: setting.php');
+        header('Location: edit_profile.php');
         exit;
     }
     
