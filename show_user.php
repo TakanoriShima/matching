@@ -26,6 +26,9 @@
     // ログインしているユーザが、この人にいいねしているかどうか
     $favorite_flag = FavoriteDAO::is_favorite($visit_user_id, $id);
     
+    // ログインしているユーザが、この人とマッチングしているかどうか
+    $matching_flag = FavoriteDAO::is_matching($visit_user_id, $id);
+    
     // View の表示
     include_once 'show_user_view.php';
     

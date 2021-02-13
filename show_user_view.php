@@ -91,6 +91,9 @@
                                     <p class="color-red"><?= count($profile->get_my_all_favorited()) ?>いいね</p>
                                 </div>
                             </div>
+                            <?php if($matching_flag): ?>
+                            <a href="messages.php" class="offset-sm-6 btn btn-primary">メッセージ</a>
+                            <?php endif; ?>
                         </div>
                         <div class="col-sm-6">
                             <ul class="my_profile">

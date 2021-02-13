@@ -172,5 +172,36 @@
             // 全マッチング情報を返す
             return $my_all_matchings;
         }
+        
+        // ログインしている会員が、指定した相手とマッチングしているかどうか判定
+        public static function is_matching($favorite_user_id, $favorited_user_id){
+            try{
+                // データベースに接続
+                $pdo = self::get_connection();
+                // INSERT文準備
+                $stmt = $pdo->prepare('SELECT * FROM favorites WHERE favorite_user_id = :favorite_user_id and favorited_user_id in (SELECT favorite_user_id FROM favorites WHERE favorited_user_id=:favorite_user_id and favorite_user_id=:favorited_user_id);');
+                // バインド処理（上のあやふやな部分は実はこれでした）
+                $stmt->bindParam(':favorite_user_id', $favorite_user_id, PDO::PARAM_INT);
+                $stmt->bindParam(':favorited_user_id', $favorited_user_id, PDO::PARAM_INT);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Favoriteクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Favorite');
+                // favorite情報を取得
+                $favorite = $stmt->fetch();
+  
+                // いいね情報がテーブルに存在していれば
+                if($favorite !== false){
+                    return true;
+                }else{
+                    return false;
+                }
+                
+            }catch(PDOException $e){
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+        }
  
     }
