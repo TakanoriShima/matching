@@ -93,8 +93,34 @@
                 // データベース切断
                 self::close_connection($pdo, $stmt);
             }
-            // 注目する会員にいいねしたた全情報を返す
+            // 注目する会員にいいねした全情報を返す
             return $my_all_favorited;  
+        }
+        
+        // ログインした会員がいいねした全情報を取得
+        public static function get_my_all_favorite($user_id){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM favorites WHERE favorite_user_id=:favorite_user_id ORDER BY created_at DESC');
+                // バインド処理
+                $stmt->bindParam(':favorite_user_id', $user_id, PDO::PARAM_INT);
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Favorite');
+                // 会員を取得
+                $my_all_favorite = $stmt->fetchAll();
+                
+            }catch(PDOException $e){
+                $my_all_favorite =  false;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            // 注目する会員がいいねした全情報を返す
+            return $my_all_favorite;  
         }
         
         // 指定された会員が指定された相手をいいねから外す
@@ -115,6 +141,36 @@
                 // データベース切断
                 self::close_connection($pdo, $stmt);
             }
+        }
+        
+        // 指定された会員が、マッチングしている全情報を取得
+        public static function matching_now($user_id){
+            try{
+                // データベース接続
+                $pdo = self::get_connection();
+                // SELECT文実行準備
+                $stmt = $pdo->prepare('SELECT * FROM favorites WHERE favorite_user_id = :user_id and favorited_user_id in (SELECT favorite_user_id FROM favorites WHERE favorited_user_id=:user_id)');
+                // バインド処理
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                
+                // SELECT文本番実行
+                $stmt->execute();
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Favorite');
+                // マッチング全情報を取得
+                $my_all_matchings = $stmt->fetchAll();
+                
+                
+               
+            }catch(PDOException $e){
+                $my_all_matchings =  false;
+            }finally{
+                // データベース切断
+                self::close_connection($pdo, $stmt);
+            }
+            
+            // 全マッチング情報を返す
+            return $my_all_matchings;
         }
  
     }

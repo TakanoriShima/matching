@@ -14,16 +14,16 @@
             $this->favorited_user_id = $favorited_user_id;
         }
         
-        //いいねをしてしてくれた会員情報を取得するメソッド
+        //いいねをした会員情報を取得するメソッド
         public function get_favorite_user(){
-            $favorite_user = UserDAO::get_user_by_id($this->favorite_user_id);
-            return $favorite;
+            $favorite_user = UserDAO::get_user_by_id($this->favorited_user_id);
+            return $favorite_user;
         }
         
-        // いいねをされた会員情報を取得するメソッド
+        // いいねをしてくれた会員情報を取得するメソッド
         public function get_favorited_user(){
-            $favorited_user = UserDAO::get_user_by_id($this->favorited_user_id);
-            return $favorited_user;
+            $favorite_user = UserDAO::get_user_by_id($this->favorite_user_id);
+            return $favorite_user;
         }
-    
+        
     }
