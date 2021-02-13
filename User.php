@@ -1,5 +1,6 @@
 <?php
     require_once 'FootPrintDAO.php';
+    require_once 'ProfileDAO.php';
     
     class User{
         // プロパティ
@@ -29,6 +30,26 @@
         public function get_profile(){
             $profile = UserDAO::get_profile_by_id($this->id);
             return $profile;
+        }
+        
+        // BMI結果表示
+        public function show_bmi(){
+            $profile = ProfileDAO::get_profile_by_id($this->id);
+            $bmi = $profile->calc_bmi();
+            // 体型
+            if($bmi < 18.5){
+                return 'やや細め';
+            }else if($bmi < 25){
+                return '普通';
+            }else if($bmi < 30){
+                return 'やや太め';
+            }else if($bmi < 35){
+                return '太め';
+            }else if($bmi < 40){
+                return 'かなり太め';
+            }else{
+                return '肥満';
+            }
         }
     
     }

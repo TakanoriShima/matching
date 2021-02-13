@@ -57,4 +57,10 @@
             $my_all_favorited = FavoriteDAO::get_my_all_favorited($this->user_id);
             return $my_all_favorited;
         }
+        
+        // BMIを計算するメソッド
+        public function calc_bmi(){
+            $bmi = $this->weight / (($this->height * 0.01) * ($this->height * 0.01));
+            return $bmi;
+        }
     }

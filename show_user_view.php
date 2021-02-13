@@ -76,7 +76,7 @@
                             <p class="ml-3 mt-2 text-center"><span class="login">●</span>ログイン中</p>
                             <?php endif; ?>
                             <div class="col-sm-4">
-                                <div class="offset-sm-2 col-sm-6">
+                                <div class="offset-sm-2 col-sm-7">
                                     <?php if($favorite_flag === false): ?> 
                                     <form action="create_favorite.php" method="POST">
                                         <input type="hidden" name="favorited_user_id" value="<?= $profile->get_user()->id ?>">
@@ -88,6 +88,7 @@
                                         <button type="submit">いいね解除</button>
                                     </form>
                                     <?php endif; ?>
+                                    <p class="color-red"><?= count($profile->get_my_all_favorited()) ?>いいね</p>
                                 </div>
                             </div>
                         </div>

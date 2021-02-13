@@ -148,7 +148,7 @@
                             <select name="weight" class="form-control">
                                 <option value="0">選択してください</option>
                             <?php for($i = 40; $i <= 100; $i++): ?>
-                                <option value="<?= $i ?>" <?php if($i === (int)$profile->weight): ?>selected<?php endif; ?>><?= $profile->weight ?>kg</option>
+                                <option value="<?= $i ?>" <?php if($i === (int)$profile->weight): ?>selected<?php endif; ?>><?= $i ?>kg</option>
                             <?php endfor;?>
                             </select>
                         </div>

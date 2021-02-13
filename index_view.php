@@ -37,12 +37,14 @@
                         <th>会員番号</th>
                         <th>年齢</th>
                         <th>性別</th>
+                        <th>体型</th>
                     </tr>
                 <?php foreach($users as $user){ ?>
                     <tr>
                         <td><?= $user->id ?></td>
                         <td><?= $user->age ?>歳</td>
                         <td><?= $user->gender ?></td>
+                        <td><?= $user->get_profile()->height?>cm / <?= $user->show_bmi() ?></td>
                     </tr>
                 <?php } ?>
                 </table>
